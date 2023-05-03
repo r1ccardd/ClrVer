@@ -3,6 +3,40 @@
 
 @echo off
 
+:CheckForUpdates
+set local=1.1
+set localtwo=%LOCAL%
+if exist "%TEMP%\Updater.bat" DEL /S /Q /F "%TEMP%\Updater.bat" >nul 2>&1
+curl -g -L -# -o "%TEMP%\Updater.bat" "https://raw.githubusercontent.com/r1ccardd/ClrVer/main/Ver" >nul 2>&1
+call "%TEMP%\Updater.bat"
+if "%LOCAL%" gtr "%LOCALTWO%" (
+	clsr
+	Mode 65,16
+	echo.
+	echo  --------------------------------------------------------------
+	echo                           Update found
+	echo  --------------------------------------------------------------
+	echo.
+	echo                    Your current version: %LOCALTWO%
+	echo.
+	echo                          New version: %LOCAL%
+	echo.
+	echo.
+	echo.
+	echo      [Y] Yes, Update
+	echo      [N] No
+	echo.
+	%SYSTEMROOT%\System32\choice.exe /c:YN /n /m "%DEL%                                >:"
+	set choice=!errorlevel!
+	if !choice! == 1 (
+		curl -L -o %0 "https://github.com/r1ccardd/ClrVer/releases/download/0.1/UniversalCleaner.bat" >nul 2>&1
+		call %0
+		exit /b
+	)
+	Mode 130,45
+)
+
+
 REM Run as Admin
 reg add HKLM /F >nul 2>&1
 if %errorlevel% neq 0 start "" /wait /I /min powershell -NoProfile -Command start -verb runas "'%~s0'" && exit /b
@@ -104,8 +138,7 @@ mode 63,11
 title made by sex!#0110/for any issue oro#5023
 set "choice="
 cls
-:call title
-echo                                                   %COL%[34mpage 1/2
+echo                            %LOCAL%                       %COL%[34mpage 1/2
 echo                          %COL%[34mVERSION:0,1
 echo                    %COL%[90m m5#5000 and m4#4000
 echo.               
@@ -116,11 +149,46 @@ echo.
 echo.                 %COL%[31m [X exit] %COL%[34m [N next page]
 %SYSTEMROOT%\System32\choice.exe /c:1234567XD /n /m "%DEL%> "
 set choice=%errorlevel%
-if "%choice%"=="1" call:next
+if "%choice%"=="1" goto MainCleaner
+if "%choice%"=="2" goto Discord
+if "%choice%"=="3" goto More
 
+:MainCleaner
+title Cleaner
+mode 55,15
+set "choice="
+cls
+echo.
+echo. %COL%[31m  #####                                            
+echo. %COL%[31m#     # #      ######   ##   #    # ###### #####  
+echo. %COL%[31m#       #      #       #  #  ##   # #      #    # 
+echo. %COL%[90m#       #      #####  #    # # #  # #####  #    # 
+echo. %COL%[31m#       #      #      ###### #  # # #      #####  
+echo. %COL%[31m#     # #      #      #    # #   ## #      #   #  
+echo. %COL%[31m #####  ###### ###### #    # #    # ###### #    # 
+echo. 
+echo.          %COL%[90m [%COL%[31m 1%COL%[90m ] %COL%[31m Synapse X %COL%[90m [%COL%[31m 2%COL%[90m ] %COL%[31m KRNL
+echo.                       %COL%[31m [B back]
+echo.
+%SYSTEMROOT%\System32\choice.exe /c:1234567XD /n /m "%DEL%> "
+set choice=%errorlevel%
+if "%choice%"=="1" goto synapse
+if "%choice%"=="2" call:soon
 
-:next
-%COL%[90mThis feature has not been finished yet but will be coming soon.
+:soon
+title Coming soon...
+cls
+mode con: cols=106 lines=15
+echo.
+echo. %COL%[33m######   #######  ##     ## #### ##    ##  ######       ######   #######   #######  ##    ##             
+echo.%COL%[33m##    ## ##     ## ###   ###  ##  ###   ## ##    ##     ##    ## ##     ## ##     ## ###   ##             
+echo.%COL%[33m##       ##     ## #### ####  ##  ####  ## ##           ##       ##     ## ##     ## ####  ##             
+echo.%COL%[33m##       ##     ## ## ### ##  ##  ## ## ## ##   ####     ######  ##     ## ##     ## ## ## ##             
+echo.%COL%[33m##       ##     ## ##     ##  ##  ##  #### ##    ##           ## ##     ## ##     ## ##  ####             
+echo.%COL%[33m##    ## ##     ## ##     ##  ##  ##   ### ##    ##     ##    ## ##     ## ##     ## ##   ### ### ### ###
+echo. %COL%[33m######   #######  ##     ## #### ##    ##  ######       ######   #######   #######  ##    ## ### ### ### 
+PING localhost -n 4 >NUL 
+
 
 
 
