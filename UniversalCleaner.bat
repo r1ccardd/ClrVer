@@ -1,4 +1,3 @@
-:: made by sex!#0110
-:: oro#5023 for any issue
+:: made by nicotine#0246
 
 nothing to see here.
