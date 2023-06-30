@@ -1,3 +1,3 @@
-We are proud to announce our cleaner!
-made by nvi#2918.
+We are proud to announce our cleaner and performance booster!
+made by luocooo.
 Anyway, enjoy!
